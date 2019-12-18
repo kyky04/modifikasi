@@ -91,7 +91,7 @@
             </div>
           </div>
           <div class="card-footer justify-content-center">
-            <button type="submit" class="btn btn-primary btn-link btn-lg">{{ __('Lets Go') }}</button>
+            <button type="submit" onclick="remove(2);" class="btn btn-primary btn-link btn-lg">{{ __('Lets Go') }}</button>
           </div>
         </div>
       </form>
@@ -112,4 +112,27 @@
     </div>
   </div>
 </div>
+@endsection
+
+@section('js')
+<script type="text/javascript">
+function remove(id){
+  Swal.fire({
+    title: 'Mulai ?',
+    text: "Mulai Proses Pencarian ?",
+    type: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Ya, Proses!'
+    }).then((result) => {
+    if (result.value) {
+      window.location.replace('{{ url("jenis_surat/delete") }}/'+id);
+    }
+  })
+}
+$(document).ready(function(){
+  {!! Session::get('notification') !!}
+});
+</script>
 @endsection
